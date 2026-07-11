@@ -11,8 +11,8 @@
   DTS:LocaleID="7177"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="3"
-  DTS:VersionGUID="{FD860439-1F47-45F3-BDE1-513B014DF1FF}">
+  DTS:VersionBuild="7"
+  DTS:VersionGUID="{ECD899E4-A53A-4A60-A3FA-CDAAE0F516E1}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -91,6 +91,18 @@
           DTS:ConnectRetryCount="1"
           DTS:ConnectRetryInterval="5"
           DTS:ConnectionString="Data Source=LAPTOP-KUUVB7MJ\MSSQLSERVER01;Initial Catalog=dwh_Bank;Provider=SQLOLEDB.1;Integrated Security=SSPI;Application Name=SSIS-Package1-{F268AAB8-6DCF-4CD5-AB02-B4565676AF6A}LAPTOP-KUUVB7MJ\MSSQLSERVER01.dwh_Bank;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[LAPTOP-KUUVB7MJ\MSSQLSERVER01.stg_Bank]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{62F5082F-E94F-4B00-B8E0-C3407E5B68C3}"
+      DTS:ObjectName="LAPTOP-KUUVB7MJ\MSSQLSERVER01.stg_Bank">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=LAPTOP-KUUVB7MJ\MSSQLSERVER01;Initial Catalog=stg_Bank;Provider=SQLOLEDB.1;Integrated Security=SSPI;Application Name=SSIS-Package1-{62F5082F-E94F-4B00-B8E0-C3407E5B68C3}LAPTOP-KUUVB7MJ\MSSQLSERVER01.stg_Bank;Auto Translate=False;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
@@ -331,7 +343,7 @@
                 <property
                   dataType="System.String"
                   description="Specifies the name of the database object used to open a rowset."
-                  name="OpenRowset">[dwh_transactions]</property>
+                  name="OpenRowset">[stg_transactions]</property>
                 <property
                   dataType="System.String"
                   description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -374,8 +386,8 @@
               <connections>
                 <connection
                   refId="Package\Data Flow Task\OLE DB Destination.Connections[OleDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[LAPTOP-KUUVB7MJ\MSSQLSERVER01.dwh_Bank]"
-                  connectionManagerRefId="Package.ConnectionManagers[LAPTOP-KUUVB7MJ\MSSQLSERVER01.dwh_Bank]"
+                  connectionManagerID="Package.ConnectionManagers[LAPTOP-KUUVB7MJ\MSSQLSERVER01.stg_Bank]"
+                  connectionManagerRefId="Package.ConnectionManagers[LAPTOP-KUUVB7MJ\MSSQLSERVER01.stg_Bank]"
                   description="The OLE DB runtime connection used to access the database."
                   name="OleDbConnection" />
               </connections>
@@ -499,7 +511,34 @@
         </pipeline>
       </DTS:ObjectData>
     </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Truncate stg_transactions"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{EBB31739-732D-458F-951F-A8509A0B3B35}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Truncate stg_transactions"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{62F5082F-E94F-4B00-B8E0-C3407E5B68C3}"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE dwh_Bank.dbo.dwh_transactions" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
   </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{8A67ED79-0624-425B-96B8-86482604255D}"
+      DTS:From="Package\Truncate stg_transactions"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Data Flow Task" />
+  </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
 <!--If you manually edit this section and make a mistake, you can delete it. -->
@@ -511,11 +550,49 @@
     design-time-name="Package">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="150.4,41.6"
           Id="Package\Data Flow Task"
-          TopLeft="275.499985247851,128.566665810876" />
+          TopLeft="276.333318535653,177.966665467355" />
+        <NodeLayout
+          Size="203.2,41.6"
+          Id="Package\Truncate stg_transactions"
+          TopLeft="237.166655648086,12.9666668233607" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="338.766655648086,54.5666668233606">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="12.7666628875667,123.399998643994"
+              Start="0,0"
+              End="12.7666628875667,115.899998643994">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,57.6999993219972" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,57.6999993219972"
+                    Point2="0,61.6999993219972"
+                    Point3="4,61.6999993219972" />
+                  <mssgle:LineSegment
+                    End="8.76666288756672,61.6999993219972" />
+                  <mssgle:CubicBezierSegment
+                    Point1="8.76666288756672,61.6999993219972"
+                    Point2="12.7666628875667,61.6999993219972"
+                    Point3="12.7666628875667,65.6999993219972" />
+                  <mssgle:LineSegment
+                    End="12.7666628875667,115.899998643994" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </Package>
