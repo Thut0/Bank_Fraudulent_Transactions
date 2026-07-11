@@ -11,8 +11,8 @@
   DTS:LocaleID="7177"
   DTS:ObjectName="01_Load_Customers_To_Staging"
   DTS:PackageType="5"
-  DTS:VersionBuild="3"
-  DTS:VersionGUID="{77843534-AEA4-4657-8925-A106A2F17A31}">
+  DTS:VersionBuild="6"
+  DTS:VersionGUID="{033A1AEC-CCEA-4551-923B-FC904B786194}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -460,7 +460,34 @@
         </pipeline>
       </DTS:ObjectData>
     </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Truncate stg_customers"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{8B2B54C7-162F-4DE3-8CF0-9C0761B4117E}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Truncate stg_customers"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{30082AC2-166A-41E5-90E9-07D6FBC74A61}"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE stg_Bank.dbo.stg_customers;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
   </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{976E4F3D-FAD8-4111-A4D8-E415B4615423}"
+      DTS:From="Package\Truncate stg_customers"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Data Flow Task" />
+  </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
 <!--If you manually edit this section and make a mistake, you can delete it. -->
@@ -472,11 +499,49 @@
     design-time-name="Package">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="150.4,41.6"
           Id="Package\Data Flow Task"
-          TopLeft="5.5,5.5" />
+          TopLeft="75.4999961753688,164.099998897115" />
+        <NodeLayout
+          Size="189.6,41.6"
+          Id="Package\Truncate stg_customers"
+          TopLeft="43.8333345171478,67.23333332128" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="138.633334517148,108.83333332128">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-14.6000035514433,55.2666655758354"
+              Start="0,0"
+              End="-14.6000035514433,47.7666655758354">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,23.6333327879177" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,23.6333327879177"
+                    Point2="0,27.6333327879177"
+                    Point3="-4,27.6333327879177" />
+                  <mssgle:LineSegment
+                    End="-10.6000035514433,27.6333327879177" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-10.6000035514433,27.6333327879177"
+                    Point2="-14.6000035514433,27.6333327879177"
+                    Point3="-14.6000035514433,31.6333327879177" />
+                  <mssgle:LineSegment
+                    End="-14.6000035514433,47.7666655758354" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </Package>
