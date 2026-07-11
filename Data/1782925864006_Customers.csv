@@ -1,0 +1,6 @@
+CustomerID,Name,Country,AccountStatus
+C001,John Smith,USA,Active
+C002,Maria Lopez,Spain,Active
+C003,Wei Zhang,China,Active
+C004,Peter Brown,UK,Suspended
+C005,Aisha Khan,UAE,Active
