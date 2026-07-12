@@ -11,8 +11,8 @@
   DTS:LocaleID="7177"
   DTS:ObjectName="01_Load_Customers_To_Staging"
   DTS:PackageType="5"
-  DTS:VersionBuild="6"
-  DTS:VersionGUID="{033A1AEC-CCEA-4551-923B-FC904B786194}">
+  DTS:VersionBuild="7"
+  DTS:VersionGUID="{4E6419E8-F456-4CD1-A77F-8C74B8F1861D}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -553,14 +553,14 @@
         <NodeLayout
           Size="151.2,41.6"
           Id="Package\Data Flow Task\Flat File Source"
-          TopLeft="116.499998793006,0.500000521540631" />
+          TopLeft="116.499998793006,3.50000047683715" />
         <NodeLayout
           Size="171.2,41.6"
           Id="Package\Data Flow Task\OLE DB Destination"
-          TopLeft="115.499999254942,92.4999995976687" />
+          TopLeft="115.499999254942,95.4999995529652" />
         <EdgeLayout
           Id="Package\Data Flow Task.Paths[Flat File Source Output]"
-          TopLeft="192.099998793006,42.1000005215406">
+          TopLeft="192.099998793006,45.1000004768372">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
